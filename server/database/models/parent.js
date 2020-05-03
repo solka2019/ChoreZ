@@ -11,6 +11,10 @@ const parentSchema = new Schema({
     trim: true,
     required: "Enter your name"
   },
+  name : {
+    type: String,
+    trim: true
+  },
   password: {
     type: String,
     required : "Enter your password"

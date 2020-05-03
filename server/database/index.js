@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //27017 is the default mongoDB port
-const uri = "mongodb://localhost:27017/choresAppDb";
+const uri = "mongodb://localhost:27017/choresAppDB";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => { 
