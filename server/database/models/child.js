@@ -10,6 +10,11 @@ const childSchema = new Schema({
   },
   tasks: {
     type: [ taskModel.schema ]
+  },
+  parent:
+  {
+    type: String,
+    required : "Enter parent name"
   } 
 });
 
