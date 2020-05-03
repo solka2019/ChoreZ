@@ -12,10 +12,10 @@
             "webRoot": "${workspaceFolder}"
         },
         {
-			"type": "node",
-			"request": "launch",
-			"name": "Launch myProgram",
-			"program": "${workspaceFolder}/npm start"
-        }
+            "name": "Attach to server.js",
+            "type": "node",
+            "request": "attach",
+            "port": 8080
+        },
     ]
 }

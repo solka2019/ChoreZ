@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Task = require("task.js");
+const taskModel = require("./task");
 
 const childSchema = new Schema({
   name: {
@@ -8,7 +8,9 @@ const childSchema = new Schema({
     trim: true,
     required: "Enter your chid's name"
   },
-  tasks: [ Task ]
+  tasks: {
+    type: [ taskModel.schema ]
+  } 
 });
 
 const Child = mongoose.model("Child", childSchema);
