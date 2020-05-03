@@ -25,7 +25,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "api": "nodemon ./server/server.js",
-    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\""
+    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
+    "debugServer": "node --nolazy --inspect-brk=9229 server/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

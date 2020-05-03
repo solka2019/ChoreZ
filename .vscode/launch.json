@@ -12,10 +12,19 @@
             "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Attach to server.js",
+            "name": "Attach to already running server.js",
             "type": "node",
             "request": "attach",
-            "port": 8080
+            "port": 9229
         },
+        {
+            "name": "Launch server.js via npm and attach",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script", "debugServer"],
+            "port": 9229
+          }
     ]
 }
