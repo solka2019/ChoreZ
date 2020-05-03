@@ -8,14 +8,14 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },
         {
 			"type": "node",
 			"request": "launch",
 			"name": "Launch myProgram",
-			"program": "${workspaceFolder}/server.js"
-		},
+			"program": "${workspaceFolder}/npm start"
+        }
     ]
 }
