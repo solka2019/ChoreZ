@@ -22,7 +22,7 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
         console.log('handleSubmit');
 
         axios
@@ -34,11 +34,16 @@ class LoginForm extends Component {
                 console.log('login response: ');
                 console.log(response);
                 if (response.status === 200) {
-                    // update App.js state
+                    // update App.js state - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
                     this.props.updateUser({
                         loggedIn: true,
-                        username: response.data.username
+                        username: response.data.username,
+                        name: response.data.name,
+                        children: response.data.children,
+                        tasks : response.data.tasks,
+                        date: response.data.date
                     });
+
                     // update the state to redirect to home
                     this.setState({
                         redirectTo: '/'

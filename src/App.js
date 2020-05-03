@@ -12,23 +12,27 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      name: null,
+      children: [],
+      tasks: [],
+      date: null
     };
 
-    this.getUser = this.getUser.bind(this);
+    this.getUser = this.getParentUser.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
-    this.getUser();
+    this.getParentUser();
   }
 
   updateUser (userObject) {
     this.setState(userObject);
   }
 
-  getUser() {
+  getParentUser() {
     axios.get('/parent/').then(response => {
       console.log('Get parent response: ');
       console.log(response.data);
