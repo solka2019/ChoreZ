@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Parent = require('../database/models/parent');
 const passport = require('../passport');
-
+// SE O SERVIDOR RECEBEU O PEDIDO DE POST. CRIAR PARENT TEM QUE TER UMA ROUTE CRIADA PRA ISSO PRO SERVIDOR ENTENDER E CRIAR ISSO E NAO DAR ERROR 400 OU 500
 router.post('/', (req, res) => {
     console.log('parent signup');
 
@@ -10,7 +10,8 @@ router.post('/', (req, res) => {
         username,
         password
     } = req.body;
-
+// ESTE PARENT EH UM OBJECT QUE FOI CRIADO NO MODEL. FIND ONE EH A FUNCAO QUE JA VEM COM O MONGOOSE. FIND ONE EH PRA PROCURAR SE JA EXISTE UM FUNCIONARIO 
+// COM ESTE NOME. ELE VAI TESTAR SE O USUARIO JA EXISTE E NAO VAI CRIAR OUTRO COM O MESMO NOME.
     // ADD VALIDATION
     Parent.findOne(
         {
