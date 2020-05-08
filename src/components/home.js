@@ -13,7 +13,7 @@ class Home extends Component {
         return ( 
             <div>
                 <p> This is the main screen for our Child Chores app</p>
-                <img style={imageStyle} src="../resources/logo no tran.png" />
+                <img style={imageStyle} src="../resources/logono.png" />
             </div>
         );
     }
