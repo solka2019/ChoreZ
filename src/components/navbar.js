@@ -33,7 +33,7 @@ class Navbar extends Component {
         console.log(this.props);
         
         return (
-            <div>
+            <div >
 
                 <header className="navbar App-header" id="nav-container">
                     <div className="col-4" >
