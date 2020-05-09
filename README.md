@@ -23,6 +23,4 @@ The server code will run on port 8080 and the React app on port 3000.
 
 
 
-
-
 ## Github
