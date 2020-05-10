@@ -19,11 +19,11 @@ const parentSchema = new Schema({
     type: String,
     required : "Enter your password"
   },
-  children: {
-    type: [ childModel.schema ]
+  childIds: {
+    type: [ mongoose.Schema.ObjectId ]
   },
-  tasks : {
-    type: [ taskModel.schema ]
+  taskIds : {
+    type: [ mongoose.Schema.ObjectId ]
   },
   date: {
     type: Date,
@@ -42,7 +42,7 @@ parentSchema.methods = {
 
 parentSchema.pre('save', function (next) {
 	if (!this.password) {
-		console.log('models/parent.js =======NO PASSWORD PROVIDED=======')
+		console.log('models/parent.js =======NO PASSWORD PROVIDED=======');
 		next();
 	} else {
 		console.log('models/parent.js hashPassword in pre save');
@@ -52,5 +52,55 @@ parentSchema.pre('save', function (next) {
 	}
 });
 
+parentSchema.virtual('parentId').get(function(){
+  return this._id;
+});
+
 const Parent = mongoose.model("Parent", parentSchema);
 module.exports = Parent;
+
+// let newParent = new Parent(
+//   {
+//     username: "mom",
+//     name: "mom",
+//     password: "mom",
+//     childIds: [  ],
+//     taskIds: [  ]
+//   }
+// );
+
+// let newChild = new childModel(
+//   {
+//     name: "kid",
+//     parentId: newParent.parentId,
+//     taskIds: [ ]
+//   }
+// );
+
+// let newTask1 = new taskModel(
+//   {
+//     task: "Do dishes",
+//     value: 5,
+//     childId: newChild.childId,
+//     parentId: newParent.parentId,
+//     completed: false
+//   }
+// );
+
+// let newTask2 = new taskModel(
+//   {
+//     task: "Do dishes",
+//     value: 5,
+//     childId: newChild.childId,
+//     completed: false
+//   }
+// );
+
+// newParent.childIds = [ newChild.childId ];
+// newParent.taskIds = [ newTask1.taskId, newTask2.taskId ];
+// newChild.taskIds = [newTask1.taskId, newTask2.taskId];
+
+// newChild.save();
+// newTask1.save();
+// newTask2.save();
+// newParent.save();

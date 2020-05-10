@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const taskModel = require("./task");
+// const taskModel = require("./task");
+
 
 const childSchema = new Schema({
   name: {
@@ -8,14 +9,17 @@ const childSchema = new Schema({
     trim: true,
     required: "Enter your chid's name"
   },
-  tasks: {
-    type: [ taskModel.schema ]
+  taskIds: {
+    type: [ mongoose.Schema.ObjectId ]
   },
-  parent:
+  parentId:
   {
-    type: String,
-    required : "Enter parent name"
+    type: mongoose.Schema.ObjectId
   } 
+});
+
+childSchema.virtual('childId').get(function(){
+  return this._id;
 });
 
 const Child = mongoose.model("Child", childSchema);
