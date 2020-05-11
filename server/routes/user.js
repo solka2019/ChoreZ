@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Parent = require('../database/models/parent');
+const Child = require('../database/models/child');
+const Task = require('../database/models/task');
 const passport = require('../passport');
 
 router.post('/', (req, res) => {
@@ -11,11 +13,9 @@ router.post('/', (req, res) => {
         password
     } = req.body;
 
-    // ADD VALIDATION
-    Parent.findOne(
-        {
-        username: username
-        }, 
+    Parent.findOne({
+            username: username
+        },
         (err, user) => {
             if (err) {
                 console.log('User.js post error: ', err);
@@ -44,25 +44,61 @@ router.post(
         next();
     },
     passport.authenticate('local'),
-    (req, res) => {
+    async (req, res) => {
         console.log('logged in', req.user);
-        res.send(req.user);
+        // res.send(req.user);
+        // get children
+        const childrenArray = await Child.find({
+            parentId: req.user.parentId
+        });
+        const tasksArray = await Task.find({
+            parentId: req.user.parentId
+        });
+
+        const parent = await Parent.findOne({
+            username: req.user.username
+        });
+
+        res.send({
+            user: parent,
+            children: childrenArray,
+            tasks: tasksArray
+        });
     }
 );
 
-router.get('/', (req, res, next) => {
-    console.log('===== user!!======');
-    console.log(req.user);
+router.get('/', async (req, res, next) => {
+    console.log('Check if parent is already logged in');
+    console.log('user: ' + req.user);
     if (req.user) {
-        res.json({
-            user: req.user
+        // get children
+        const childrenArray = await Child.find({
+            parentId: req.user.parentId
         });
-    } else {
+        const tasksArray = await Task.find({
+            parentId: req.user.parentId
+        });
+
         res.json({
-            user: null
+            user: req.user,
+            children: childrenArray,
+            tasks: tasksArray
+        });
+
+    } else {
+        // if not loggedin, we need to return the tasks because it's a child in the main screen
+        // get children
+        const childrenArray = await Child.find({});
+        const tasksArray = await Task.find({
+            completed: false
+        }); //kids only want to see the tasks they have not finished yet!
+        res.json({
+            user: null,
+            children: childrenArray,
+            tasks: tasksArray
         });
     }
-})
+});
 
 router.post('/logout', (req, res) => {
     if (req.user) {
