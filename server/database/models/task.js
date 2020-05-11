@@ -11,13 +11,11 @@ const taskSchema = new Schema({
     type: Number,
     required : "Enter how many points the task is worth"
   },
-  child: {
-    type: String,
-    trim: true
+  childId: {
+    type:  mongoose.Schema.ObjectId
   },
-  parent : {
-    type: String,
-    trim: true
+  parentId : {
+    type:  mongoose.Schema.ObjectId,
   },
   completed : {
     type : Boolean,
@@ -31,6 +29,10 @@ const taskSchema = new Schema({
     type: Date,
     default: null
   }
+});
+
+taskSchema.virtual('taskId').get(function(){
+  return this._id;
 });
 
 const Task = mongoose.model("Task", taskSchema);

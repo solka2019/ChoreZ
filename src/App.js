@@ -1,3 +1,5 @@
+// Send data/state from Components: https://towardsdatascience.com/passing-data-between-react-components-parent-children-siblings-a64f89e24ecf
+
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
@@ -41,14 +43,24 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          user: response.data.user,
+          name: response.data.user.name,
+          username: response.data.user.username,
+          children: response.data.children,
+          tasks: response.data.tasks,
+          date: null
         });
 
       } else {
         console.log('Get parent: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          user: null,
+          username: null,
+          name: null,
+          children: response.data.children,
+          tasks: response.data.tasks,
+          date: null
         });
       }
     });
@@ -69,12 +81,14 @@ class App extends Component {
         {/* Routes to different components */}
         <Route
           exact path="/"
-          component={Home} />
+          render={() => 
+            <Home appState={this.state}/>}
+        />
 
         <Route
           path="/login"
           render={() =>
-            <LoginForm
+            <LoginForm appState={this.state}
               updateUser={this.updateUser}
             />}
         />
