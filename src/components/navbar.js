@@ -6,8 +6,8 @@ import '../App.css';
 import axios from 'axios';
 
 class Navbar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.logout = this.logout.bind(this);
     }
 

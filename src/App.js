@@ -1,4 +1,5 @@
 // Send data/state from Components: https://towardsdatascience.com/passing-data-between-react-components-parent-children-siblings-a64f89e24ecf
+// https://www.robinwieruch.de/react-pass-props-to-component#children-as-a-function
 
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -10,8 +11,9 @@ import Navbar from './components/navbar';
 import Home from './components/home';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    
     this.state = {
       loggedIn: false,
       username: null,
