@@ -8,15 +8,13 @@ function ListTasks(props){
     const listItems = items.map(item =>
    {
        return (
-       <div className="list" key={item.taskId}>
+       <div className="list" key={item._id}>
             <p>
-            <input type="text" id={"task"+item.taskId} value={item.task} onChange={(e)=>{
-                props.setUpdate(e.target.value,item.key)}}/>
-            <input type="text" id={"value"+item.taskId} value={item.value} onChange={(e)=>{
-                props.setUpdate(e.target.value,item.key)}}/>
+            <input type="text" id={"task"+item._id} value={item.task} readOnly/>
+            <input type="text" id={"value"+item._id} value={item.value} readOnly/>
             <span>  
                 <FontAwesomeIcon className="faicons" onClick={() => {
-                    props.deleteItem(item.key)
+                    props.onCompleteTask(item._id)
                 }} icon="trash" />
 
             </span>

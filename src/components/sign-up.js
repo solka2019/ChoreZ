@@ -2,22 +2,25 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 class Signup extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			username: '',
 			password: '',
 			confirmPassword: '',
 
-		}
+		};
+
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
+
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
 	}
+	
 	handleSubmit(event) {
 		console.log('sign-up handleSubmit, username: ');
 		console.log(this.state.username);
