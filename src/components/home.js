@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ListTasks from "./ListTasks";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 
 library.add(faTrash);
 
@@ -12,16 +13,22 @@ class Home extends Component {
         this.onCompleteTask = this.onCompleteTask.bind(this);
     }
 
-    onCompleteTask(taskId)
+    onCompleteTask(id)
     {
         alert("delete test");
-        if(!taskId)
+        if(!id)
         {
             // didn't get a taskId, exit
             return;
         }
 
-        // Todo. Create an AJAX call to the server to set this task as completed
+        // Todo. Create an AJAX/AXIOS call to the server to set this task as completed
+        // https://www.educative.io/edpresso/how-to-make-an-axios-post-request
+        axios.post('/api/taskcompleted', {
+            taskId: id
+        }).then(function (response) {
+            alert("done test" + response);
+        });
     }
 
     render() {

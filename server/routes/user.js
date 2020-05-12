@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
         password
     } = req.body;
 
+    // https://mongoosejs.com/docs/api.html#model_Model.findOne
     Parent.findOne({
             username: username
         },
