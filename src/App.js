@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     
-    this.getUser = this.getParentUser.bind(this);
+    this.getParentUser = this.getParentUser.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.updateUser = this.updateUser.bind(this);
     // this refresh the state of list based on a parentId for the parent page
@@ -23,6 +23,9 @@ class App extends Component {
     // this refresh the state of lists that are used in a child page
     this.refreshChildTasks = this.refreshChildTasks.bind(this);
     this.refreshChildren = this.refreshChildren.bind(this);
+    // Screen refreshes
+    this.refreshListForParentScreen = this.refreshListForParentScreen.bind(this);
+    this.refreshListsForChildScreen = this.refreshListsForChildScreen.bind(this);
 
     this.state = {
       loggedIn: false,
@@ -34,7 +37,9 @@ class App extends Component {
       refreshTasksByParent: this.refreshTasksByParent,
       refreshChildrenByParent: this.refreshChildrenByParent,
       refreshChildTasks: this.refreshChildTasks,
-      refreshChildren: this.refreshChildren
+      refreshChildren: this.refreshChildren,
+      refreshListsForChildScreen: this.refreshListsForChildScreen,
+      refreshListForParentScreen: this.refreshListForParentScreen
     };
 
   }
@@ -91,6 +96,18 @@ class App extends Component {
     }});
   }
 
+  refreshListsForChildScreen()
+  {
+    this.refreshChildTasks();
+    this.refreshChildren();
+  }
+
+  refreshListForParentScreen(id)
+  {
+    this.refreshChildrenByParent(id);
+    this.refreshTasksByParent(id);
+  }
+
   componentDidMount() {
     this.getParentUser();
   }
@@ -135,7 +152,7 @@ class App extends Component {
     return (
       <div className="App">
    
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} appState={this.state} />
 
         {/* greet user if logged in: */}
         {

@@ -24,9 +24,12 @@ class Navbar extends Component {
               children: null,
               tasks: null
             });
+            // since the parent logged off, we need to re-load the 
+            // lists for children
+            this.props.appState.refreshListsForChildScreen();
           }
         }).catch(error => {
-            console.log('Logout error');
+            console.log('Logout error:' + error);
         });
       }
 
