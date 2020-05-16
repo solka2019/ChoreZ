@@ -25,10 +25,8 @@ class Home extends Component {
     onChildMessageClose()
     {
         // Force a reload of the page
-        // TODO: we want to reload only the tasks
-        this.setState({
-            redirectTo: '/'
-        });
+        // https://davidwalsh.name/react-force-render
+        this.forceUpdate();
     }
 
     onCompleteTask(id)
@@ -39,14 +37,15 @@ class Home extends Component {
             return;
         }
 
-        let that = this;
+        let thisFromClass = this;
 
         // Create an AJAX/AXIOS call to the server to set this task as completed
         // https://www.educative.io/edpresso/how-to-make-an-axios-post-request
         axios.post('/api/taskcompleted', {
             taskId: id
         }).then(function (response) {
-            that.setState({
+            thisFromClass.props.appState.refreshChildTasks();
+            thisFromClass.setState({
                 message: "Yay!!! You finished another chore!"
             });
         });
