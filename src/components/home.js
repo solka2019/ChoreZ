@@ -26,7 +26,10 @@ class Home extends Component {
     {
         // Force a reload of the page
         // https://davidwalsh.name/react-force-render
-        this.forceUpdate();
+        this.props.appState.refreshChildTasks();
+        this.setState({
+            message: null
+        });
     }
 
     onCompleteTask(id)
@@ -44,7 +47,6 @@ class Home extends Component {
         axios.post('/api/taskcompleted', {
             taskId: id
         }).then(function (response) {
-            thisFromClass.props.appState.refreshChildTasks();
             thisFromClass.setState({
                 message: "Yay!!! You finished another chore!"
             });

@@ -147,21 +147,21 @@ class App extends Component {
         <Route
           exact path="/"
           render={() => 
-            <Home appState={this.state}/>}
+            <Home     appState={this.state}/>}
         />
 
         <Route
           path="/login"
           render={() =>
             <LoginForm appState={this.state}
-              updateUser={this.updateUser}
+                       updateUser={this.updateUser}
             />}
         />
 
         <Route
           path="/signup"
           render={() =>
-            <Signup/>}
+            <Signup appState={this.state}/>}
         />
 
       </div>
