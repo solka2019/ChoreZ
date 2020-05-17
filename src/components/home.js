@@ -132,7 +132,7 @@ class Home extends Component {
                 return (
                     <div>
                         <p> This is the main screen for our Child Chores app</p>
-                        {/* <img style={imageStyle} src="../resources/img/logono.png" /> */}
+                        <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
                         { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChildMessageClose} title="Great job!"/>}
 
                         { this.props.appState.tasks && 
