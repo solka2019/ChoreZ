@@ -71,7 +71,7 @@ class Home extends Component {
             taskId: id
         }).then(function (response) {
             // only a parent can delete a task, so let's refresh the list now
-            thisReferenceFromClass.props.appState.refreshTasksByParent(thisReferenceFromClass.appState.user._id);
+            thisReferenceFromClass.props.appState.refreshTasksByParent(thisReferenceFromClass.props.appState.user._id);
         });
     }
 
@@ -97,7 +97,7 @@ class Home extends Component {
                     <Redirect to={{ pathname: this.state.redirectTo }} />
                 </div>
             )
-            
+
         } else {
             if(this.props.appState.loggedIn){
 
@@ -107,7 +107,7 @@ class Home extends Component {
 
                 return (
                     <div>
-                        <p> This is the main screen for our Parent management of the app</p>
+                        <p>List of incomplete chores: </p>
 
                         { /* Only render the task list if there is a list from the server, and passed by the App component*/}
                         { this.props.appState.tasks && 
@@ -115,6 +115,7 @@ class Home extends Component {
                                 incompleteOnly="true" 
                                 onDeleteTask={this.onDeleteTask} /> }
 
+                        <p>List of children and their completed chores: </p>
 
                         { this.props.appState.children &&
                             <ChildrenChores appState={this.props.appState} />

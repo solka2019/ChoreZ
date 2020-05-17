@@ -4,8 +4,10 @@ import FlipMove from 'react-flip-move';
 
 // icons: https://react-icons.github.io/react-icons/#/icons/fa
 // https://stackoverflow.com/questions/56351531/how-to-find-icon-names-for-font-awesome-to-import-with-react
+// find the names to use here: https://react-icons.github.io/react-icons/#/
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
+
 
 function ListTasks(props){
     const items = props.items;
@@ -30,13 +32,13 @@ function ListTasks(props){
                         <input type="text" id={"value"+item._id} value={item.value} readOnly/>
                         <span>
                             { 
-                                (typeof props.onCompleteTask !== 'undefined') && <FaCheckCircle onClick={() => {
+                                (typeof props.onCompleteTask !== 'undefined') && <FaCheckCircle className="faicons" onClick={() => {
                                     props.onCompleteTask(item._id)
                                 }} />
                             }  
                             
                             { 
-                                (typeof props.onDeleteTask !== 'undefined') && <FaTrash onClick={() => {
+                                (typeof props.onDeleteTask !== 'undefined') && <FaTrash className="faicons" onClick={() => {
                                     props.onDeleteTask(item._id)
                                 }} />
                             }  
