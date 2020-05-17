@@ -30,6 +30,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
+      user: null,
       name: null,
       children: [],
       tasks: [],
