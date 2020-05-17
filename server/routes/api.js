@@ -92,10 +92,11 @@ router.post('/taskupdated',  (req, res) => {
 
 
 // refreshTasksByParent from the App.js
+// https://stackoverflow.com/questions/46404051/send-object-with-axios-get-request
 router.get('/tasksbyparent', async (req, res) => {
     console.log('get all child tasks from a given parentId - will return every task completed or not');
     const tasksArray = await Task.find({
-        parentId: req.parentId
+        parentId: req.query.parentId
     });
 
     console.log("Sending tasks to browser:");
@@ -107,10 +108,11 @@ router.get('/tasksbyparent', async (req, res) => {
 });
 
 // refreshChildrenByParent from App.js
+// https://stackoverflow.com/questions/46404051/send-object-with-axios-get-request
 router.get('/childrenbyparent', async (req, res) => {
     console.log('get all children from a given parentId ');
     const childrenArray = await Child.find({
-        parentId: req.parentId
+        parentId: req.query.parentId
     });
 
     console.log("Sending children to browser:");

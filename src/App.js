@@ -46,8 +46,15 @@ class App extends Component {
   }
 
   refreshTasksByParent(id) {
+    if(!id)
+    {
+        return;
+    }
+
+    // https://stackoverflow.com/questions/46404051/send-object-with-axios-get-request
+    // https://kapeli.com/cheat_sheets/Axios.docset/Contents/Resources/Documents/index
     axios.get('/api/tasksbyparent', {
-        parentId: id
+        params: { parentId: id }
       }).then(response => {
         console.log('Get api response: ');
         console.log(response.data);
@@ -59,8 +66,13 @@ class App extends Component {
   }
 
   refreshChildrenByParent(id) {
+    if(!id)
+    {
+        return;
+    }
+
     axios.get('/api/childrenbyparent', {
-      parentId: id
+      params: { parentId: id }
     }).then(response => {
       console.log('Get api response: ');
       console.log(response.data);
@@ -101,12 +113,14 @@ class App extends Component {
   {
     this.refreshChildTasks();
     this.refreshChildren();
+    // this.forceUpdate();
   }
 
   refreshListForParentScreen(id)
   {
     this.refreshChildrenByParent(id);
     this.refreshTasksByParent(id);
+    // this.forceUpdate();
   }
 
   componentDidMount() {
