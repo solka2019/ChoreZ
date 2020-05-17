@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListTasks from "./ListTasks";
+import ChildrenChores from "./childrenChores";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
@@ -96,6 +97,7 @@ class Home extends Component {
                     <Redirect to={{ pathname: this.state.redirectTo }} />
                 </div>
             )
+            
         } else {
             if(this.props.appState.loggedIn){
 
@@ -109,13 +111,19 @@ class Home extends Component {
 
                         { /* Only render the task list if there is a list from the server, and passed by the App component*/}
                         { this.props.appState.tasks && 
-                            <ListTasks items={this.props.appState.tasks} 
+                            <ListTasks items={this.props.appState.tasks}
+                                incompleteOnly="true" 
                                 onDeleteTask={this.onDeleteTask} /> }
+
+
+                        { this.props.appState.children &&
+                            <ChildrenChores appState={this.props.appState} />
+                        }
                     </div>
                 );
             }
             else {
-                
+
                 // ----------------------
                 // Children home screen
                 // ----------------------
