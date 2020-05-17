@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListTasks from "./ListTasks";
 import ChildrenChores from "./childrenChores";
+import ChildForm from "./child-form";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
@@ -120,6 +121,12 @@ class Home extends Component {
                         { this.props.appState.children &&
                             <ChildrenChores appState={this.props.appState} />
                         }
+
+                        <p>Create a new chore: </p>
+
+                        <p>Create a new child: </p>
+                        <ChildForm appState={this.props.appState} />
+
                     </div>
                 );
             }

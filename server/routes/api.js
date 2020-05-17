@@ -19,16 +19,16 @@ router.post('/taskcompleted',  (req, res) => {
             if (err) {
                 console.log('failed to find one task with id passed in and not completed!: ', err);
                 res.json({
-                    // todo: send something back to browser saying it worked
+                    // send something back to browser saying it worked
                     success: false
                 });
             } else if (task) {
-                // todo: got the task, now we need to set it to 'complete: true'
+                // got the task, now we need to set it to 'complete: true'
                 console.log(task);
                 task.completed = true;
                 await task.save();
                 res.json({
-                    // todo: send something back to browser saying it worked
+                    // send something back to browser saying it worked
                     success: true
                 });
             }           
@@ -48,7 +48,7 @@ router.post('/taskdeleted',  (req, res) => {
             if (err) {
                 console.log('failed to find one task with id passed in and not completed!: ', err);
                 res.json({
-                    // todo: send something back to browser saying it worked
+                    // send something back to browser saying it worked
                     success: false
                 });
             } else if (task) {
@@ -56,7 +56,7 @@ router.post('/taskdeleted',  (req, res) => {
                 // https://kb.objectrocket.com/mongo-db/how-to-delete-documents-with-mongoose-235
                 await Task.deleteOne( { _id: task._id });
                 res.json({
-                    // todo: send something back to browser saying it worked
+                    // send something back to browser saying it worked
                     success: true
                 });
             }           
@@ -89,7 +89,70 @@ router.post('/taskupdated',  (req, res) => {
         });
 });
 
+// createchild from browser
+router.post('/createchild',  (req, res) => {
+    console.log('createchild api received a request from browser');
 
+    const newChildName = req.body.name;
+    const parentId = req.body.parentId;
+
+      // https://mongoosejs.com/docs/api.html#model_Model.findOne
+      Child.findOne({
+        name: newChildName
+        },
+        (err, child) => {
+            if (err) {
+                console.log('Child.js post error: ', err);
+            } else if (child) {
+                res.json({
+                    error: `Sorry, already a child with the name: ${newChildName}`
+                });
+            } else {
+                const newChild = new Child({
+                    name: newChildName,
+                    parentId: parentId
+                });
+                newChild.save((err, savedUser) => {
+                    if (err) return res.json(err);
+                    res.json(savedUser);
+                });
+            }
+        });
+});
+
+router.post('/createtask',  (req, res) => {
+    console.log('createtask api received a request from browser');
+
+    const taskData = req.body.task;
+    const parentId = req.body.parentId;
+
+      // https://mongoosejs.com/docs/api.html#model_Model.findOne
+      Task.findOne({
+            task: taskData.task,
+            value: taskData.value
+        },
+        (err, task) => {
+            if (err) {
+                console.log('task.js post error: ', err);
+            } else if (task) {
+                res.json({
+                    error: `Sorry, already a task with the same text and value.`
+                });
+            } else {
+                const newTask = new Task({
+                    task: taskData.task,
+                    value: taskData.value,
+                    parentId: parentId,
+                    completed: false
+                });
+
+                newTask.save((err, savedTask) => {
+                    if (err) return res.json(err);
+                    res.json(savedTask);
+                });
+            }
+        });
+});
 
 // refreshTasksByParent from the App.js
 // https://stackoverflow.com/questions/46404051/send-object-with-axios-get-request
