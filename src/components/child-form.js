@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import ListTasks from "./ListTasks";
 import AlertDialogSlide from './error-dialog';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
 
@@ -30,7 +28,7 @@ class ChildForm extends Component {
             message: null
         });
     }
-    
+
     onChildSubmit()
     {
         if((typeof this.state.name === 'undefined') || this.state.name.length === 0) {
@@ -52,7 +50,9 @@ class ChildForm extends Component {
                     referenceFromClass.setState({
                         name:'',
                         message: response.data.error
-                    });                   
+                    });
+                    // return and don't refresh the lists because nothing was added
+                    return;                   
                 }
 
                 referenceFromClass.setState({
@@ -60,7 +60,7 @@ class ChildForm extends Component {
                 });
 
                 // Refresh the parent screen, which will re-load the other components
-                referenceFromClass.props.appState.refreshListForParentScreen(referenceFromClass.props.appState.user._id);
+                referenceFromClass.props.appState.refreshListForParentScreen(parentId);
         });
 
     }

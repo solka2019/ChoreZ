@@ -124,25 +124,25 @@ router.post('/createtask',  (req, res) => {
     console.log('createtask api received a request from browser');
 
     const taskData = req.body.task;
-    const parentId = req.body.parentId;
 
       // https://mongoosejs.com/docs/api.html#model_Model.findOne
       Task.findOne({
             task: taskData.task,
-            value: taskData.value
+            value: taskData.value,
+            parentId: taskData.parentId
         },
         (err, task) => {
             if (err) {
                 console.log('task.js post error: ', err);
             } else if (task) {
                 res.json({
-                    error: `Sorry, already a task with the same text and value.`
+                    error: `Sorry, you already have a task with the same text and value.`
                 });
             } else {
                 const newTask = new Task({
                     task: taskData.task,
                     value: taskData.value,
-                    parentId: parentId,
+                    parentId: taskData.parentId,
                     completed: false
                 });
 
