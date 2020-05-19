@@ -8,6 +8,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+// https://react-bootstrap.github.io/components/buttons/
+import Button from 'react-bootstrap/Button';
 
 library.add(faTrash);
 
@@ -17,22 +19,40 @@ class Home extends Component {
 
         this.state = {
             error: null,
-            message: null,
-            redirectTo: null
+            dialogMessage: null,
+            dialogTitle: null,
+            redirectTo: null,
+            currentChildName: '',
+            currentChildId: ''
         };
 
         this.onCompleteTask = this.onCompleteTask.bind(this);
         this.onDeleteTask = this.onDeleteTask.bind(this);
         this.onChildMessageClose = this.onChildMessageClose.bind(this);
+        this.onChildSelected = this.onChildSelected.bind(this);
     }
 
-    onChildMessageClose()
-    {
+    
+
+    onChildSelected(id, name) {
+        if (!id || !name ) {
+            return;
+        }
+
+        this.setState({
+            currentChildId: id,
+            currentChildName: name
+        });
+        this.forceUpdate();
+    }
+
+    onChildMessageClose() {
         // Force a reload of the page
         // https://davidwalsh.name/react-force-render
         this.props.appState.refreshChildTasks();
         this.setState({
-            message: null
+            dialogMessage: null,
+            dialogTitle: null
         });
     }
 
@@ -49,10 +69,12 @@ class Home extends Component {
         // Create an AJAX/AXIOS call to the server to set this task as completed
         // https://www.educative.io/edpresso/how-to-make-an-axios-post-request
         axios.post('/api/taskcompleted', {
-            taskId: id
+            taskId: id,
+            childId: this.state.currentChildId
         }).then(function (response) {
             thisReferenceFromClass.setState({
-                message: "Yay!!! You finished another chore!"
+                dialogMessage: "Yay!!! You finished another chore!",
+                dialogTitle: "Great job!"
             });
         });
     }
@@ -98,7 +120,24 @@ class Home extends Component {
                 <div>
                     <Redirect to={{ pathname: this.state.redirectTo }} />
                 </div>
-            )
+            );
+        } else if (!this.props.appState.loggedIn && this.props.appState.children && 
+                    this.props.appState.children.length > 1 && !this.state.currentChildName ) {
+            // Need to show a screen for the kids to select which one they are
+            let thisReferenceFromClass = this;
+            const childrenSelectors = this.props.appState.children.map( child => {
+                return (
+                    <Button variant="primary" size="lg"
+                        onClick={ () => {thisReferenceFromClass.onChildSelected(child._id, child.name)}}>{child.name}</Button>
+                );
+            });
+
+            return (
+                <div>
+                    <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
+                    {childrenSelectors}
+                </div>
+            );
 
         } else {
             if(this.props.appState.loggedIn){
@@ -137,17 +176,25 @@ class Home extends Component {
                 // Children home screen
                 // ----------------------
 
-                return (
-                    <div>
-                        <p> This is the main screen for our Child Chores app</p>
-                        <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
-                        { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChildMessageClose} title="Great job!"/>}
+                // https://reactjs.org/docs/conditional-rendering.html
+                if (!this.state.currentChildName) {
+                    return (
+                        <div>
 
-                        { this.props.appState.tasks && 
-                            <ListTasks items={this.props.appState.tasks} 
-                                    onCompleteTask={this.onCompleteTask} /> }
-                    </div>
-                );
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div>
+                            <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
+                            <p>Hello {this.state.currentChildName}!!!</p>
+                            {this.state.dialogMessage && 
+                                <AlertDialogSlide message={this.state.dialogMessage} onClose={this.onChildMessageClose} title={this.state.dialogTitle}/>}
+                            {this.props.appState.tasks && 
+                                <ListTasks items={this.props.appState.tasks} onCompleteTask={this.onCompleteTask} />}
+                        </div>
+                    );
+                }
             }
         }      
     }

@@ -9,6 +9,7 @@ router.post('/taskcompleted',  (req, res) => {
     console.log('task completed api received a request from browser');
 
     const idFromBrowser = req.body.taskId;
+    const childIdFromBrowser = req.body.childId;
 
     // https://mongoosejs.com/docs/api.html#model_Model.findOne
     Task.findOne({
@@ -26,6 +27,7 @@ router.post('/taskcompleted',  (req, res) => {
                 // got the task, now we need to set it to 'complete: true'
                 console.log(task);
                 task.completed = true;
+                task.childId = childIdFromBrowser;
                 await task.save();
                 res.json({
                     // send something back to browser saying it worked
