@@ -43,22 +43,25 @@ class Home extends Component {
             currentChildId: id,
             currentChildName: name
         });
-        this.forceUpdate();
+
+        //this.forceUpdate();
     }
 
     onChildMessageClose() {
         // Force a reload of the page
         // https://davidwalsh.name/react-force-render
-        this.props.appState.refreshChildTasks();
+       
         this.setState({
             dialogMessage: null,
             dialogTitle: null
         });
+
+        this.props.appState.refreshChildTasks();
     }
 
     onCompleteTask(id)
     {
-        if(!id)
+        if (!id)
         {
             // didn't get a taskId, exit
             return;
@@ -162,8 +165,13 @@ class Home extends Component {
                             <ChildrenChores appState={this.props.appState} />
                         }
 
+                        <p></p>
+                        
                         <p>Create a new chore: </p>
                         <ChoreForm appState={this.props.appState} />
+                        
+                        <p></p>
+
                         <p>Create a new child: </p>
                         <ChildForm appState={this.props.appState} />
 
@@ -177,13 +185,7 @@ class Home extends Component {
                 // ----------------------
 
                 // https://reactjs.org/docs/conditional-rendering.html
-                if (!this.state.currentChildName) {
-                    return (
-                        <div>
-
-                        </div>
-                    );
-                } else {
+                if (this.state.currentChildName) {
                     return (
                         <div>
                             <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
@@ -194,6 +196,9 @@ class Home extends Component {
                                 <ListTasks items={this.props.appState.tasks} onCompleteTask={this.onCompleteTask} />}
                         </div>
                     );
+                }
+                else {
+                    return (null);
                 }
             }
         }      
