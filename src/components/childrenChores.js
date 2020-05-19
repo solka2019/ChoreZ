@@ -16,15 +16,23 @@ class ChildrenChores extends Component {
     {
         console.log("onClearedTasks called");
         if((typeof tasksToDelete !== 'undefined') && tasksToDelete.length > 0) {
-            
-            tasksToDelete.map(async task => {
-                await axios.post('/api/taskdeleted', {
+            // need to send multiple requests to the server, and only at the end refresh the screen
+            // https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
+            let referenceFromClass = this;
+            let allRequests = tasksToDelete.map( task => {
+                console.log("onClearedTasks sending server /api/taskdeleted call for task: " + task.task);                 
+                let request = axios.post('/api/taskdeleted', {
                     taskId: task._id
                 });
+
+                return (request);});
+
+            axios.all(allRequests).then( ()=> {
+                // now call the refresh at the home, so the appState is up-to-date
+                console.log("onClearedTasks calling refreshTasksByParent...");
+                referenceFromClass.props.appState.refreshTasksByParent(this.props.appState.user._id);
+                console.log("onClearedTasks refreshTasksByParent completed...");
             });
-          
-            // now call the refresh at the home, so the appState is up-to-date
-            this.props.appState.refreshTasksByParent(this.props.appState.user._id);
         }
     }
 
