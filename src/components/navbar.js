@@ -39,6 +39,7 @@ class Navbar extends Component {
         console.log('navbar render, props: ');
         console.log(this.props);
         
+        // https://reactjs.org/docs/conditional-rendering.html
         return (
             <div>
 
