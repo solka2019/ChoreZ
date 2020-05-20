@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
         password
     } = req.body;
 
+    // https://mongoosejs.com/docs/api.html#model_Model.findOne
     Parent.findOne({
             username: username
         },
@@ -92,6 +93,11 @@ router.get('/', async (req, res, next) => {
         const tasksArray = await Task.find({
             completed: false
         }); //kids only want to see the tasks they have not finished yet!
+        console.log("Sending children to browser:");
+        console.log(JSON.stringify(childrenArray));
+        console.log("Sending tasks to browser:");
+        console.log(JSON.stringify(tasksArray));
+        
         res.json({
             user: null,
             children: childrenArray,
