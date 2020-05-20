@@ -8,6 +8,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+//https://create-react-app.dev/docs/adding-bootstrap/
+import 'bootstrap/dist/css/bootstrap.css';
+
 // https://react-bootstrap.github.io/components/buttons/
 import Button from 'react-bootstrap/Button';
 
@@ -143,6 +146,7 @@ class Home extends Component {
             );
 
         } else {
+
             if(this.props.appState.loggedIn){
 
                 // ----------------------
@@ -150,32 +154,38 @@ class Home extends Component {
                 // ----------------------
 
                 return (
-                    <div>
-                        <p>List of incomplete chores: </p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                
+                                <p>List of incomplete chores: </p>
 
-                        { /* Only render the task list if there is a list from the server, and passed by the App component*/}
-                        { this.props.appState.tasks && 
-                            <ListTasks items={this.props.appState.tasks}
-                                incompleteOnly="true" 
-                                onDeleteTask={this.onDeleteTask} /> }
+                                { /* Only render the task list if there is a list from the server, and passed by the App component*/}
+                                { this.props.appState.tasks && 
+                                    <ListTasks items={this.props.appState.tasks}
+                                        incompleteOnly="true" 
+                                        onDeleteTask={this.onDeleteTask} /> }
 
-                        <p>List of children and their completed chores: </p>
+                            </div>
+ 
+                            <div class="col-sm">
+                                <p>Create a new chore: </p>
+                                <ChoreForm appState={this.props.appState} />
+                                <p>Create a new child: </p>
+                                <ChildForm appState={this.props.appState} />
+                           </div> 
 
-                        { this.props.appState.children &&
-                            <ChildrenChores appState={this.props.appState} />
-                        }
+                           <div class="col-sm">
+                                
+                                <p>List of children and their completed chores: </p>
 
-                        <p></p>
-                        
-                        <p>Create a new chore: </p>
-                        <ChoreForm appState={this.props.appState} />
-                        
-                        <p></p>
+                                { this.props.appState.children &&
+                                    <ChildrenChores appState={this.props.appState} />
+                                }
+                            </div>
 
-                        <p>Create a new child: </p>
-                        <ChildForm appState={this.props.appState} />
-
-                    </div>
+                        </div>
+                    </div>             
                 );
             }
             else {
