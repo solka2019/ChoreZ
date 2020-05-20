@@ -10,6 +10,7 @@ const PORT = 8080;
 
 // Route requires
 const parentRoute = require('./routes/user');
+const apiRoute = require('./routes/api');
 
 // MIDDLEWARE
 app.use(morgan('dev'));
@@ -39,6 +40,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/parent', parentRoute);
+app.use('/api', apiRoute);
 
 // Starting Server 
 app.listen(PORT, () => {

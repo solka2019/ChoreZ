@@ -15,6 +15,7 @@
             "name": "Attach to already running server.js",
             "type": "node",
             "request": "attach",
+            "processId": "${command:PickProcess}",
             "port": 9229
         },
         {
