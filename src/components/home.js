@@ -8,6 +8,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+
 //https://create-react-app.dev/docs/adding-bootstrap/
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -158,7 +159,9 @@ class Home extends Component {
                         <div class="row">
                             <div class="col-sm">
                                 
-                                <p>List of incomplete chores: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+                                    
+                                    List of incomplete chores: </p>
 
                                 { /* Only render the task list if there is a list from the server, and passed by the App component*/}
                                 { this.props.appState.tasks && 
@@ -169,15 +172,25 @@ class Home extends Component {
                             </div>
  
                             <div class="col-sm">
-                                <p>Create a new chore: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+                                    
+                                    
+                                    Create a new chore: </p>
                                 <ChoreForm appState={this.props.appState} />
-                                <p>Create a new child: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+
+                                   
+                                    
+                                    
+                                    Create a new child: </p>
                                 <ChildForm appState={this.props.appState} />
                            </div> 
 
                            <div class="col-sm">
                                 
-                                <p>List of children and their completed chores: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+
+                                    List of children and their completed chores: </p>
 
                                 { this.props.appState.children &&
                                     <ChildrenChores appState={this.props.appState} />
