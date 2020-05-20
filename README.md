@@ -20,8 +20,11 @@ In order to run this app in your local environment, run the following commands:
 
 The server code will run on port 8080 and the React app on port 3000.
 
-## Snapshot
+## Seed the database
 
-
+Extract the file \server\database\mongo_seed.zip in any any folder and run the file run.bat
+This will create a user "mom" with a password "mom" with one child and two chores.
+Once we go to the home page, it should show these tasks, and when the "mom" logs in, she should
+see the configuration page to add chores and children.
 
 ## Github
