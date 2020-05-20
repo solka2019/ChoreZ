@@ -1,9 +1,9 @@
 .list{
     color: #fff;
-    width: 400px;
+    width: 100%;
     margin: 20px auto;
     height: 100px;
-    background-color: #bf07ac;
+    background-color: #4b79bd;
     border-radius: 5px;
 }
 .list p{

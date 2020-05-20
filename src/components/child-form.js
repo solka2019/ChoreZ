@@ -75,7 +75,10 @@ class ChildForm extends Component {
             <div>
                 { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChildCreateMessageClose} title="Error!"/>}
 
-                <p>Enter the new child name:</p>
+                <p className='childName' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                                     
+                    Enter the new child name:</p>
                 
                 <input type="text"  value={this.state.name} onChange={(e)=>{
                      this.setUpdate(e.target.value)}}/>

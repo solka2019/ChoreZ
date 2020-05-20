@@ -98,11 +98,16 @@ class ChoreForm extends Component {
 
                 {/* <p>Enter the new chore information:</p> */}
                 
-                <p>chore:</p>
+                <p className='chore' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                    chore:</p>
                 <input type="text"  value={this.state.task} onChange={(e)=>{
                      this.setUpdateTask(e.target.value)}}/>
 
-                <p>value:</p>
+                <p className='chore' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                    
+                    value:</p>
                 <input type="text"  value={this.state.value} onChange={(e)=>{
                      this.setUpdateValue(e.target.value)}}/>
     

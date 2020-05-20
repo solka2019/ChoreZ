@@ -26,9 +26,11 @@ function ListTasks(props){
         if (addItem) {
             return (
 
-            <div className="list" key={item._id}>
+            <div className="list" key={item._id} style={{fontSize: '2.2em', color: 'blue', fontFamily: 'arial'}} 
+                data-toggle="tooltip" data-placement="top" title={item.task}>
+
                     <p>
-                        <input type="text" id={"task"+item._id} value={item.task} readOnly/>
+                        <input type="text" className="text-truncate" id={"task"+item._id} value={item.task} readOnly/>
                         <input type="text" id={"value"+item._id} value={item.value} readOnly/>
                         <span>
                             { 
