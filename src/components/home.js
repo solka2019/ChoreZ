@@ -134,14 +134,16 @@ class Home extends Component {
             let thisReferenceFromClass = this;
             const childrenSelectors = this.props.appState.children.map( child => {
                 return (
-                    <Button variant="primary" size="lg"
+                    <Button variant="primary" size="lg" className= 'kid-btn'
                         onClick={ () => {thisReferenceFromClass.onChildSelected(child._id, child.name)}}>{child.name}</Button>
+
+
                 );
             });
 
             return (
                 <div>
-                    <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
+                    <img style={imageStyle} src="../resources/img/ClipartKey_643659.png"  />
                     {childrenSelectors}
                 </div>
             );
