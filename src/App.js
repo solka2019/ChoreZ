@@ -2,6 +2,7 @@
 // https://www.robinwieruch.de/react-pass-props-to-component#children-as-a-function
 
 import React, { Component } from 'react';
+
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 // components
@@ -9,6 +10,10 @@ import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
 import Home from './components/home';
+//https://create-react-app.dev/docs/adding-bootstrap/
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
+
 
 class App extends Component {
   constructor(props) {
@@ -172,7 +177,7 @@ class App extends Component {
         {/* greet user if logged in: */}
         {
           this.state.loggedIn &&
-          <p>Welcome back, {this.state.username}!</p>
+          <p className='welcome' style={{fontSize: '2.2em', color: 'blue', fontFamily: 'arial'}} >Welcome back, {this.state.username}!</p>
         }
         
         {/* Routes to different components */}
