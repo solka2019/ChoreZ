@@ -96,7 +96,7 @@ class ChoreForm extends Component {
             <div>
                 { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChoreCreateMessageClose} title="Error!"/>}
 
-                <p>Enter the new chore information:</p>
+                {/* <p>Enter the new chore information:</p> */}
                 
                 <p>chore:</p>
                 <input type="text"  value={this.state.task} onChange={(e)=>{
