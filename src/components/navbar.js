@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route, Link } from 'react-router-dom';
-import logo from '../logo.svg';
+import logo from '../chorezlogo.png';
 import '../App.css';
 import axios from 'axios';
 
 class Navbar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.logout = this.logout.bind(this);
     }
 
@@ -19,11 +19,18 @@ class Navbar extends Component {
           if (response.status === 200) {
             this.props.updateUser({
               loggedIn: false,
-              username: null
+              username: null,
+              user: null,
+              children: null,
+              tasks: null
             });
+            
+            // since the parent logged off, we need to re-load the 
+            // lists for children
+            this.props.appState.refreshListsForChildScreen();
           }
         }).catch(error => {
-            console.log('Logout error');
+            console.log('Logout error:' + error);
         });
       }
 
@@ -32,6 +39,7 @@ class Navbar extends Component {
         console.log('navbar render, props: ');
         console.log(this.props);
         
+        // https://reactjs.org/docs/conditional-rendering.html
         return (
             <div>
 
