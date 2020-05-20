@@ -4,8 +4,8 @@ import axios from 'axios';
 import AlertDialogSlide from './error-dialog';
 
 class LoginForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             username: '',
             password: '',
@@ -73,7 +73,7 @@ class LoginForm extends Component {
 
     render() {
         if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+            return (<Redirect to={{ pathname: this.state.redirectTo }} />)
         } else {
             return (
                 <div>

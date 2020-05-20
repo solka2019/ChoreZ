@@ -1,6 +1,6 @@
 // reference material: https://material-ui.com/components/dialogs/
 
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,9 +19,26 @@ export default function AlertDialogSlide(props) {
 
     const handleClose = () => {
         setOpen(false);
+        if (typeof props.onClose !== 'undefined')
+        {
+            try
+            {
+                props.onClose();
+            }
+            catch(error)
+            {
+                // ignore
+            }
+        }
     };
 
-    if (typeof props.message !== 'undefined' && props.message.length > 0) {
+    if ( (typeof props.message !== 'undefined') && props.message.length > 0) {
+        let title = "Attention!";
+        if( (typeof props.title !== 'undefined') && props.title.length > 0)
+        {
+            title = props.title;
+        }
+
         return (
             <div>
                 <Dialog
@@ -30,9 +47,8 @@ export default function AlertDialogSlide(props) {
                     keepMounted
                     onClose={handleClose}
                     aria-labelledby="alert-dialog-slide-title"
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle id="alert-dialog-slide-title">{"Attention!"}</DialogTitle>
+                    aria-describedby="alert-dialog-slide-description">
+                    <DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
                             {props.message}
