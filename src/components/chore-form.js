@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AlertDialogSlide from './error-dialog';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
+import './chore-form.css';
 
 class ChoreForm extends Component {
     constructor(props) {
@@ -93,17 +94,22 @@ class ChoreForm extends Component {
 
         return(
             
-            <div>
+            <div className='chores-points-input'>
                 { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChoreCreateMessageClose} title="Error!"/>}
 
-                <p>Enter the new chore information:</p>
+                {/* <p>Enter the new chore information:</p> */}
                 
-                <p>chore:</p>
+                <p className='chore-form' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                    Chore:</p>
                 <input type="text"  value={this.state.task} onChange={(e)=>{
                      this.setUpdateTask(e.target.value)}}/>
 
-                <p>value:</p>
-                <input type="text"  value={this.state.value} onChange={(e)=>{
+                <p className='points-chore' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                    
+                    Points:</p>
+                <input type="text" className='input-points' value={this.state.value} onChange={(e)=>{
                      this.setUpdateValue(e.target.value)}}/>
     
                 <FaPlus className="faicons" onClick={ () => {thisReferenceFromClass.onChoreSubmit()}}/>

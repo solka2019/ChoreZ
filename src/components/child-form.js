@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AlertDialogSlide from './error-dialog';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
+import './chore-form.css';
+
 
 class ChildForm extends Component {
     constructor(props) {
@@ -72,10 +74,13 @@ class ChildForm extends Component {
 
         return(
             
-            <div>
+            <div className='create-child'> 
                 { this.state.message && <AlertDialogSlide message={this.state.message} onClose={this.onChildCreateMessageClose} title="Error!"/>}
 
-                <p>Enter the new child name:</p>
+                <p className='childName' style={{fontSize: '1em', color: 'blue', fontFamily: 'arial'}} >
+                    
+                                     
+                    Enter the new child name:</p>
                 
                 <input type="text"  value={this.state.name} onChange={(e)=>{
                      this.setUpdate(e.target.value)}}/>
