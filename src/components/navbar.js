@@ -44,31 +44,32 @@ class Navbar extends Component {
             <div>
 
                 <header className="navbar App-header" id="nav-container">
-                    <div className="col-4" >
+                    <div className="col-12" >
                         {loggedIn ? (
                             <section className="navbar-section">
                                 <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">logout</span></Link>
+                                <span className="text-secondary">Logout</span></Link>
 
                             </section>
                         ) : (
                                 <section className="navbar-section">
                                     <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
+                                        <span className="text-secondary">Home</span>
                                         </Link>
                                     <Link to="/login" className="btn btn-link text-secondary">
-                                    <span className="text-secondary">parent area</span>
+                                    <span className="text-secondary">Parent Login</span>
 				</Link>
                                     <Link to="/signup" className="btn btn-link">
-                                    <span className="text-secondary">registration</span>
+                                    <span className="text-secondary">Registration</span>
 				</Link>
                                 </section>
                             )}
                     </div>
-                    <div className="col-4 col-mr-auto">
-                    <div id="top-filler"></div>
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <h1 className="App-title">Child Chores</h1>
+
+                    <div className="col-12 col-lg-auto">
+                    {/* <div id="top-filler"></div> */}
+                        <img src={logo} classId="App-logo" alt="logo" style={{width: '230px', height: '230px'}} />
+                        {/* <h1 className="App-title">Child Chores</h1> */}
                     </div>
                 </header>
             </div>

@@ -1,0 +1,41 @@
+/* /* .chore-form { */
+
+    /* background-color: rgb(159, 159, 187); */
+    /* max-width: 100px;
+    margin-bottom: 20px; */
+/* } */
+
+/* .points-chore {
+    background-color:red;
+    max-width: 30;
+    text-align: center;
+} */ 
+.chore-form {
+margin: 0px;
+
+}
+
+.points-chore {
+
+    margin-top: 20px;
+    margin-bottom:0px;
+}
+
+.input-points {
+    width: 50px;
+}
+
+.chores-points-input {
+    /* border: solid 2px black; */
+    width: 250px;
+    margin-left: 60px;
+    background-color: rgb(159, 159, 187);
+}
+
+.create-child{
+    width: 250px;
+    margin-left: 60px;
+    background-color: rgb(159, 159, 187);
+
+
+}

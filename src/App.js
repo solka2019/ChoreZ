@@ -10,7 +10,9 @@ import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
 import Home from './components/home';
-
+//https://create-react-app.dev/docs/adding-bootstrap/
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
 
 class App extends Component {
@@ -175,7 +177,7 @@ class App extends Component {
         {/* greet user if logged in: */}
         {
           this.state.loggedIn &&
-          <p>Welcome back, {this.state.username}!</p>
+          <p className='welcome' style={{fontSize: '2.2em', color: 'blue', fontFamily: 'arial'}} >Welcome back, {this.state.username}!</p>
         }
         
         {/* Routes to different components */}
