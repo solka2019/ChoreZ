@@ -33,7 +33,6 @@ function ListTasks(props) {
       return (
         <div
           className="text-truncate"
-          contentEditable="true"
           key={item._id}
           style={{
             fontSize: "2.2em",
