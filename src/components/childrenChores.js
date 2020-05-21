@@ -54,17 +54,15 @@ class ChildrenChores extends Component {
 
             return (
                 <form>
-  <div className="form-row">
-    <div className="col-7">
-    <input type="text"  value="Name" readOnly/>    
-    </div>
-    <div className="col">
-    <input type="text"  value="Points" readOnly/>
-    </div>
-    <div className="col">
-    <input type="text" className='total-points'  value={totalValue} readOnly/>
-    </div>
-  
+                    <div className="form-row">
+                        <div className="col-7">
+                        <input type="text"  value={child.name} readOnly/>    
+                        </div>
+
+                        <div className="col">
+                        <input type="text" className='total-points' value={totalValue} readOnly/>
+                        </div>
+                    
 
                  <div>
                     

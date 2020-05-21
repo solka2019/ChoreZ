@@ -217,7 +217,7 @@ class Home extends Component {
                     return (
                         <div>
                             <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
-                            <p>Hello {this.state.currentChildName}!!!</p>
+                            <p className='hello-kid'>Hello {this.state.currentChildName}!!!</p>
                             {this.state.dialogMessage && 
                                 <AlertDialogSlide message={this.state.dialogMessage} onClose={this.onChildMessageClose} title={this.state.dialogTitle}/>}
                             {this.props.appState.tasks && 
