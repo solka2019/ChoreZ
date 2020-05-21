@@ -131,7 +131,7 @@ class Home extends Component {
                 </div>
             );
         } else if (!this.props.appState.loggedIn && this.props.appState.children && 
-                    this.props.appState.children.length > 1 && !this.state.currentChildName ) {
+                    this.props.appState.children.length > 0 && !this.state.currentChildName ) {
             // Need to show a screen for the kids to select which one they are
             let thisReferenceFromClass = this;
             const childrenSelectors = this.props.appState.children.map( child => {
@@ -159,9 +159,9 @@ class Home extends Component {
                 // ----------------------
 
                 return (
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm">
                                 
                                 <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
                                     
@@ -175,7 +175,7 @@ class Home extends Component {
 
                             </div>
  
-                            <div class="col-sm">
+                            <div className="col-sm">
                                 <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
                                     
 
@@ -191,7 +191,7 @@ class Home extends Component {
                                 <ChildForm appState={this.props.appState} />
                            </div> 
 
-                           <div class="col-sm">
+                           <div className="col-sm">
                                 
                                 <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
 
