@@ -53,17 +53,29 @@ class ChildrenChores extends Component {
             });
 
             return (
-                <div>
-                    <input type="text"  value="Name" readOnly/>
-                    <input type="text"  value={child.name} readOnly/>
-                    <input type="text"  value="Points" readOnly/>
-                    <input type="text"  value={totalValue} readOnly/>
+                <form>
+  <div className="form-row">
+    <div className="col-7">
+    <input type="text"  value="Name" readOnly/>    
+    </div>
+    <div className="col">
+    <input type="text"  value="Points" readOnly/>
+    </div>
+    <div className="col">
+    <input type="text" className='total-points'  value={totalValue} readOnly/>
+    </div>
+  
+
+                 <div>
+                    
                     <FaDollarSign className="faicons" onClick={ () => {thisReferenceFromClass.onClearedTasks(childTasks)}}/>
                     {  (childTasks.length > 0) && <ListTasks items={childTasks} /> }
-                </div>
+                 </div>
+                 </div>
+                 </form>   
             );
         });
-
+       
         // After we build the individual list of chores per child, we return it for the browser to render
         return(
             <div>

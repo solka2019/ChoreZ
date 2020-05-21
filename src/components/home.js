@@ -8,6 +8,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import "./home.css";
+
 
 //https://create-react-app.dev/docs/adding-bootstrap/
 import 'bootstrap/dist/css/bootstrap.css';
@@ -143,7 +145,7 @@ class Home extends Component {
 
             return (
                 <div>
-                    <img style={imageStyle} src="../resources/img/ClipartKey_643659.png"  />
+                    {/* <img style={imageStyle} src="../resources/img/ClipartKey_643659.png"  /> */}
                     {childrenSelectors}
                 </div>
             );
@@ -176,10 +178,11 @@ class Home extends Component {
                             <div class="col-sm">
                                 <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
                                     
+
                                     
                                     Create a new chore: </p>
                                 <ChoreForm appState={this.props.appState} />
-                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+                                <p className='lists-create-child' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
 
                                    
                                     

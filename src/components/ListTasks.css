@@ -11,7 +11,7 @@
     position: relative;
     transition: ease-in-out;
 }
-.list p input{
+/* .list p input{
     background-color: red;
     border: 0;
     color: #fff;
@@ -20,7 +20,7 @@
     margin:10px;
     text-align: left;
     max-width: 200px;
-}
+} */
 .list p input:focus{
     outline: none;
 }
@@ -48,7 +48,7 @@
     transition: opacity 300ms ease-in
 }
 
-.text-truncate {
+/* .text-truncate {
 
     background-color: rgb(159, 159, 187);
     max-width: 100px;
@@ -59,4 +59,4 @@
     background-color: rgb(197, 197, 107);
     max-width: auto;
     text-align: center;
-}
+} */

@@ -57,7 +57,7 @@ class Navbar extends Component {
                                         <span className="text-secondary">Home</span>
                                         </Link>
                                     <Link to="/login" className="btn btn-link text-secondary">
-                                    <span className="text-secondary">Parent Area</span>
+                                    <span className="text-secondary">Parent Login</span>
 				</Link>
                                     <Link to="/signup" className="btn btn-link">
                                     <span className="text-secondary">Registration</span>
