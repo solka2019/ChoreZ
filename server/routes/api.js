@@ -65,6 +65,34 @@ router.post('/taskdeleted',  (req, res) => {
         });
 });
 
+router.post('/childdeleted',  (req, res) => {
+    console.log('child deleted api received a request from browser');
+
+    const idFromBrowser = req.body.childId;
+
+    // https://mongoosejs.com/docs/api.html#model_Model.findOne
+    Child.findOne({
+           _id: idFromBrowser
+        },
+        async (err, child) => {
+            if (err) {
+                console.log('failed to find one child with id passed in and not completed!: ', err);
+                res.json({
+                    // send something back to browser saying it worked
+                    success: false
+                });
+            } else if (child) {
+                console.log(child);
+                // https://kb.objectrocket.com/mongo-db/how-to-delete-documents-with-mongoose-235
+                await Child.deleteOne( { _id: child._id });
+                res.json({
+                    // send something back to browser saying it worked
+                    success: true
+                });
+            }           
+        });
+});
+
 router.post('/taskupdated',  (req, res) => {
     console.log('task updated api received a request from browser');
 
