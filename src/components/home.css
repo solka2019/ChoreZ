@@ -1,0 +1,31 @@
+html {
+
+    background-color: rgb(223, 223, 86);
+}
+
+
+.text-truncate {
+
+    background-color: rgb(159, 159, 187);
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.points {
+    background-color: rgb(197, 197, 107);
+    max-width: auto;
+    text-align: center;
+}
+
+.lists-create-child {
+
+    margin-top: 30px;
+    
+}
+
+.hello-kid {
+
+    font-size: 28px;
+    color: black;
+    font-weight: bold;
+}
