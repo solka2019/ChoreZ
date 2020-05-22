@@ -8,6 +8,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import "./home.css";
+
+
 //https://create-react-app.dev/docs/adding-bootstrap/
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -128,19 +131,21 @@ class Home extends Component {
                 </div>
             );
         } else if (!this.props.appState.loggedIn && this.props.appState.children && 
-                    this.props.appState.children.length > 1 && !this.state.currentChildName ) {
+                    this.props.appState.children.length > 0 && !this.state.currentChildName ) {
             // Need to show a screen for the kids to select which one they are
             let thisReferenceFromClass = this;
             const childrenSelectors = this.props.appState.children.map( child => {
                 return (
-                    <Button variant="primary" size="lg"
+                    <Button variant="primary" size="lg" className= 'kid-btn'
                         onClick={ () => {thisReferenceFromClass.onChildSelected(child._id, child.name)}}>{child.name}</Button>
+
+
                 );
             });
 
             return (
                 <div>
-                    <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
+                    {/* <img style={imageStyle} src="../resources/img/ClipartKey_643659.png"  /> */}
                     {childrenSelectors}
                 </div>
             );
@@ -154,11 +159,13 @@ class Home extends Component {
                 // ----------------------
 
                 return (
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm">
                                 
-                                <p>List of incomplete chores: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+                                    
+                                    List of incomplete chores: </p>
 
                                 { /* Only render the task list if there is a list from the server, and passed by the App component*/}
                                 { this.props.appState.tasks && 
@@ -168,16 +175,27 @@ class Home extends Component {
 
                             </div>
  
-                            <div class="col-sm">
-                                <p>Create a new chore: </p>
+                            <div className="col-sm">
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+                                    
+
+                                    
+                                    Create a new chore: </p>
                                 <ChoreForm appState={this.props.appState} />
-                                <p>Create a new child: </p>
+                                <p className='lists-create-child' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+
+                                   
+                                    
+                                    
+                                    Create a new child: </p>
                                 <ChildForm appState={this.props.appState} />
                            </div> 
 
-                           <div class="col-sm">
+                           <div className="col-sm">
                                 
-                                <p>List of children and their completed chores: </p>
+                                <p className='lists' style={{fontSize: '1.5em', color: 'blue', fontFamily: 'arial'}} >
+
+                                    List of children and their completed chores: </p>
 
                                 { this.props.appState.children &&
                                     <ChildrenChores appState={this.props.appState} />
@@ -199,7 +217,7 @@ class Home extends Component {
                     return (
                         <div>
                             <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
-                            <p>Hello {this.state.currentChildName}!!!</p>
+                            <p className='hello-kid'>Hello {this.state.currentChildName}!!!</p>
                             {this.state.dialogMessage && 
                                 <AlertDialogSlide message={this.state.dialogMessage} onClose={this.onChildMessageClose} title={this.state.dialogTitle}/>}
                             {this.props.appState.tasks && 

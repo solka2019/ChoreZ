@@ -1,22 +1,26 @@
 .list{
     color: #fff;
-    width: 400px;
+    width: 100%;
     margin: 20px auto;
     height: 100px;
-    background-color: #bf07ac;
+    background-color: #4b79bd;
     border-radius: 5px;
 }
 .list p{
-    padding: 10px;
+    /* margin : 30px; */
     position: relative;
     transition: ease-in-out;
 }
-.list p input{
-    background-color: transparent;
+/* .list p input{
+    background-color: red;
     border: 0;
     color: #fff;
     font-size: 18px;
-}
+    padding-left:0px;
+    margin:10px;
+    text-align: left;
+    max-width: 200px;
+} */
 .list p input:focus{
     outline: none;
 }
@@ -43,3 +47,16 @@
     opacity: 0.01;
     transition: opacity 300ms ease-in
 }
+
+/* .text-truncate {
+
+    background-color: rgb(159, 159, 187);
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.points {
+    background-color: rgb(197, 197, 107);
+    max-width: auto;
+    text-align: center;
+} */
