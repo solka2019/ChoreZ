@@ -6,18 +6,18 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.18",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@material-ui/core": "^4.9.13",
+    "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
-    "connect-mongo": "^2.0.1",
-    "express": "^4.16.2",
+    "connect-mongo": "^2.0.3",
+    "express": "^4.17.1",
     "express-session": "^1.15.6",
-    "mongoose": "^5.9.11",
+    "mongoose": "^5.9.15",
     "morgan": "^1.10.0",
-    "passport": "^0.4.0",
+    "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -27,7 +27,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-transition-group": "^4.1.0",
-    "spectre.css": "^0.5.0",
+    "spectre.css": "^0.5.8",
     "typeface-roboto": "0.0.75"
   },
   "scripts": {
@@ -36,8 +36,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "api": "nodemon ./server/server.js",
-    "dev": "concurrently \"react-scripts start\" \"nodemon server/server.js\"",
-    "debugServer": "node --nolazy --inspect-brk= 9229server/server.js"
+    "client": "npm run start",
+    "server": "nodemon ./server/server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "debugServer": "node --nolazy --inspect-brk=9229 ./server/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,8 +57,8 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
-    "nodemon": "^1.17.5"
+    "concurrently": "^3.6.1",
+    "nodemon": "^1.19.4"
   },
   "proxy": "http://localhost:8080"
 }
