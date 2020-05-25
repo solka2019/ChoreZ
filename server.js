@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
 	// Sessions
 	console.log("Creating a Heroku connection to mongoDB: process.env.MONGODB_URI = " + process.env.MONGODB_URI);
 
-	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true } );
+	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
 
 	app.use(
 		session(
