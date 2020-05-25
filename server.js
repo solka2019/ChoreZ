@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production') {
 	// IN HEROKU
+	console.log("Production build detected by NODE_ENV variable");
 	app.use(express.static('client/build'));
   
 	const path = require('path');
