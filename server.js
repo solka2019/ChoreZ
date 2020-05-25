@@ -33,7 +33,9 @@ if (process.env.NODE_ENV === 'production') {
 	});
 
 	// Sessions
-	mongoose.connect(process.env.MONGOLAB_URI);
+	console.log(process.env.MONGODB_URI);
+
+	mongoose.connect("Creating a Heroku connection to mongoDB: process.env.MONGODB_URI = " + process.env.MONGODB_URI);
 
 	app.use(
 		session(
@@ -50,6 +52,8 @@ else {
 
 	// NOT IN HEROKU
 	// Sessions
+	
+	console.log("Creating a dev environment connection to mongoDB");
 	app.use(
 		session(
 			{
