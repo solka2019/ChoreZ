@@ -3,7 +3,6 @@ const router = express.Router();
 const Parent = require('../database/models/parent');
 const Child = require('../database/models/child');
 const Task = require('../database/models/task');
-//const passport = require('../passport');
 
 router.post('/taskcompleted',  (req, res) => {
     console.log('task completed api received a request from browser');
@@ -54,9 +53,16 @@ router.post('/taskdeleted',  (req, res) => {
                     success: false
                 });
             } else if (task) {
-                console.log(task);
+                let parentId = task.parentId;
+                let id = task._id;
+                console.log('task document to delete= ' + task);
                 // https://kb.objectrocket.com/mongo-db/how-to-delete-documents-with-mongoose-235
-                await Task.deleteOne( { _id: task._id });
+                await Task.deleteOne( { _id: id });
+                let parent = await Parent.findOne( { _id: parentId});
+                if(parent) {
+                    parent.deleteTask(id);
+                    parent.save();
+                }
                 res.json({
                     // send something back to browser saying it worked
                     success: true
@@ -82,9 +88,17 @@ router.post('/childdeleted',  (req, res) => {
                     success: false
                 });
             } else if (child) {
-                console.log(child);
+                console.log('child document to delete: ' + child);
+                let id = child._id;
+                let parentId = child.parentId;
+
                 // https://kb.objectrocket.com/mongo-db/how-to-delete-documents-with-mongoose-235
-                await Child.deleteOne( { _id: child._id });
+                await Child.deleteOne( { _id: id });
+                let parent = await Parent.findOne( { _id: parentId});
+                if(parent) {
+                    parent.deleteChild(id);
+                    parent.save();
+                }
                 res.json({
                     // send something back to browser saying it worked
                     success: true
@@ -142,8 +156,17 @@ router.post('/createchild',  (req, res) => {
                     name: newChildName,
                     parentId: parentId
                 });
-                newChild.save((err, savedUser) => {
-                    if (err) return res.json(err);
+                newChild.save(async (err, savedUser) => {
+                    if (err) {
+                        return res.json(err);
+                    }
+
+                    let parent = await Parent.findOne( { _id: parentId});
+                    if(parent) {
+                        parent.addChild(newChild._id);
+                        parent.save();
+                    }
+
                     res.json(savedUser);
                 });
             }
@@ -154,6 +177,7 @@ router.post('/createtask',  (req, res) => {
     console.log('createtask api received a request from browser');
 
     const taskData = req.body.task;
+    let parentId = taskData.parentId;
 
       // https://mongoosejs.com/docs/api.html#model_Model.findOne
       Task.findOne({
@@ -176,10 +200,17 @@ router.post('/createtask',  (req, res) => {
                     completed: false
                 });
 
-                newTask.save((err, savedTask) => {
+                newTask.save(async (err, savedTask) => {
                     if (err) return res.json(err);
+                    let parent = await Parent.findOne( { _id: parentId});
+                    if(parent) {
+                        parent.addTask(savedTask._id);
+                        parent.save();
+                    }
                     res.json(savedTask);
                 });
+
+                console.log('new task document created: ' + newTask);
             }
         });
 });
@@ -225,7 +256,7 @@ router.get('/childtasks', async (req, res) => {
         completed: false
     }); //kids only want to see the tasks they have not finished yet!
 
-    console.log("Sending tasks to browser:");
+    console.log('Sending tasks to browser:');
     console.log(JSON.stringify(tasksArray));
     
     res.json({
@@ -240,7 +271,7 @@ router.get('/children', async (req, res) => {
     console.log('get all children ');
     const childrenArray = await Child.find({});
 
-    console.log("Sending children to browser:");
+    console.log('Sending children to browser:');
     console.log(JSON.stringify(childrenArray));
     
     res.json({

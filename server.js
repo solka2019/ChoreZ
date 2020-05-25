@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const dbConnection = require('./database');
-const MongoStore = require('connect-mongo')(session);
+const mongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+var mongoose = require('mongoose');
 
 // Route requires
 const parentRoute = require('./routes/user');
@@ -22,22 +23,25 @@ app.use(
 
 app.use(bodyParser.json());
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('build'));
+// if (process.env.NODE_ENV === 'production') {
+	// IN HEROKU
+	// console.log("Production build detected by NODE_ENV variable");
+	// app.use(express.static('client/build'));
   
-	const path = require('path');
-	app.get('*', (req,res) => {
-		res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-	});
-  
-}
+	// const path = require('path');
+	// app.get('*', (req,res) => {
+	// 	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	// });
+// }
+
 
 // Sessions
+console.log("Creating a dev connection to mongoDB..");
 app.use(
 	session(
 		{
 			secret: "magic-secret-word", //pick a random string to generate hash
-			store: new MongoStore({ mongooseConnection: dbConnection }),
+			store: new mongoStore({ mongooseConnection: dbConnection }),
 			resave: false,
 			saveUninitialized: false
 		}
