@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 // https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
 
 //27017 is the default mongoDB port
-const uri = "mongodb://localhost:27017/choresAppDB";
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/choresAppDB";
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => { 

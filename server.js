@@ -6,7 +6,7 @@ const dbConnection = require('./database');
 const mongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 
 // Route requires
@@ -31,40 +31,21 @@ if (process.env.NODE_ENV === 'production') {
 	app.get('*', (req,res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
-
-	// Sessions
-	console.log("Creating a Heroku connection to mongoDB: process.env.MONGODB_URI = " + process.env.MONGODB_URI);
-
-	mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
-
-	app.use(
-		session(
-			{
-				secret: "magic-secret-word", //pick a random string to generate hash
-				store: new mongoStore({ mongooseConnection: mongoose.connection }),
-				resave: false,
-				saveUninitialized: false
-			}
-		)
-	);
 }
-else {
 
-	// NOT IN HEROKU
-	// Sessions
-	
-	console.log("Creating a dev environment connection to mongoDB");
-	app.use(
-		session(
-			{
-				secret: "magic-secret-word", //pick a random string to generate hash
-				store: new mongoStore({ mongooseConnection: dbConnection }),
-				resave: false,
-				saveUninitialized: false
-			}
-		)
-	);
-}
+
+// Sessions
+console.log("Creating a dev connection to mongoDB..");
+app.use(
+	session(
+		{
+			secret: "magic-secret-word", //pick a random string to generate hash
+			store: new mongoStore({ mongooseConnection: dbConnection }),
+			resave: false,
+			saveUninitialized: false
+		}
+	)
+);
 
 // Passport init
 app.use(passport.initialize());

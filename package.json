@@ -19,7 +19,6 @@
     "connect-mongo": "^2.0.3",
     "express": "^4.17.1",
     "express-session": "^1.15.6",
-    "http-proxy-middleware": "^1.0.4",
     "mongoose": "^5.9.15",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
