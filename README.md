@@ -35,11 +35,18 @@ The server code will run on port 8080 and the React app on port 3000.
 You will need to install the Heroku-CLI before you can monitor the logs.
 1) Install the Heroku-CLI for your machine from here: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 2) Start a Windows Command Prompt (CMD) or Git Bash and enter the following command: heroku logs -t --app chorezz
+
 ## Seed the database
 
 Extract the file \server\database\mongo_seed.zip in any any folder and run the file run.bat
 This will create a user "mom" with a password "mom" with one child and two chores.
 Once we go to the home page, it should show these tasks, and when the "mom" logs in, she should
 see the configuration page to add chores and children.
+
+## Heroku
+
+Test the current deployment by going to the following URL:
+https://chorezz.herokuapp.com/
+
 
 ## Github
