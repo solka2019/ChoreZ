@@ -22,7 +22,7 @@ The most important are the following:
 - How to deploy a React+NodeJS+MongoDB app to Heroku: https://dev.to/pacheco/how-to-deploy-a-webapp-to-heroku-node-js-react-js-and-mongodb-5a7g 
 
 
-## Debug 
+## Debug in Dev Environment
 
 In order to run this app in your local environment, run the following commands:
 1) npm install
@@ -30,6 +30,11 @@ In order to run this app in your local environment, run the following commands:
 
 The server code will run on port 8080 and the React app on port 3000.
 
+## Debug Heroku deployment
+
+You will need to install the Heroku-CLI before you can monitor the logs.
+1) Install the Heroku-CLI for your machine from here: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+2) Start a Windows Command Prompt (CMD) or Git Bash and enter the following command: heroku logs -t --app chorezz
 ## Seed the database
 
 Extract the file \server\database\mongo_seed.zip in any any folder and run the file run.bat
