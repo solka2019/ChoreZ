@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const dbConnection = require('./database');
-const MongoStore = require('connect-mongo')(session);
+const mongoStore = require('connect-mongo')(session);
 const passport = require('./passport');
 const app = express();
 const PORT = 8080;
+var mongoose = require('mongoose');
 
 // Route requires
 const parentRoute = require('./routes/user');
@@ -30,12 +31,15 @@ if (process.env.NODE_ENV === 'production') {
 	app.get('*', (req,res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
+
 	// Sessions
+	mongoose.connect(process.env.MONGOLAB_URI);
+
 	app.use(
 		session(
 			{
 				secret: "magic-secret-word", //pick a random string to generate hash
-				store: new MongoStore({ url: process.env.MONGOLAB_URI }),
+				store: new mongoStore({ mongooseConnection: mongoose.connection }),
 				resave: false,
 				saveUninitialized: false
 			}
@@ -50,7 +54,7 @@ else {
 		session(
 			{
 				secret: "magic-secret-word", //pick a random string to generate hash
-				store: new MongoStore({ mongooseConnection: dbConnection }),
+				store: new mongoStore({ mongooseConnection: dbConnection }),
 				resave: false,
 				saveUninitialized: false
 			}
