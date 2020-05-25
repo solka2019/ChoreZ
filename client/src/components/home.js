@@ -9,6 +9,7 @@ import AlertDialogSlide from './error-dialog';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import "./home.css";
+import kidsRunningImg from '../resources/img/kidsRunning.png';
 
 
 //https://create-react-app.dev/docs/adding-bootstrap/
@@ -145,7 +146,7 @@ class Home extends Component {
 
             return (
                 <div>
-                    {/* <img style={imageStyle} src="../resources/img/ClipartKey_643659.png"  /> */}
+                    {/* <img style={imageStyle} src="{kidsRunningImg}"  /> */}
                     {childrenSelectors}
                 </div>
             );
@@ -216,7 +217,7 @@ class Home extends Component {
                 if (this.state.currentChildName) {
                     return (
                         <div>
-                            <img style={imageStyle} src="../resources/img/ClipartKey_643659.png" />
+                            <img style={imageStyle} src={kidsRunningImg} />
                             <p className='hello-kid'>Hello {this.state.currentChildName}!!!</p>
                             {this.state.dialogMessage && 
                                 <AlertDialogSlide message={this.state.dialogMessage} onClose={this.onChildMessageClose} title={this.state.dialogTitle}/>}
