@@ -23,26 +23,40 @@ app.use(
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production') {
+	// IN HEROKU
 	app.use(express.static('client/build'));
   
 	const path = require('path');
 	app.get('*', (req,res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
-  
-  }
+	// Sessions
+	app.use(
+		session(
+			{
+				secret: "magic-secret-word", //pick a random string to generate hash
+				store: new MongoStore({ url: process.env.MONGOLAB_URI }),
+				resave: false,
+				saveUninitialized: false
+			}
+		)
+	);
+}
+else {
 
-// Sessions
-app.use(
-	session(
-		{
-			secret: "magic-secret-word", //pick a random string to generate hash
-			store: new MongoStore({ mongooseConnection: dbConnection }),
-			resave: false,
-			saveUninitialized: false
-		}
-	)
-);
+	// NOT IN HEROKU
+	// Sessions
+	app.use(
+		session(
+			{
+				secret: "magic-secret-word", //pick a random string to generate hash
+				store: new MongoStore({ mongooseConnection: dbConnection }),
+				resave: false,
+				saveUninitialized: false
+			}
+		)
+	);
+}
 
 // Passport init
 app.use(passport.initialize());
