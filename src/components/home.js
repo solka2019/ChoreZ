@@ -82,7 +82,7 @@ class Home extends Component {
             childId: this.state.currentChildId
         }).then(function (response) {
             thisReferenceFromClass.setState({
-                dialogMessage: "Yay!!! You finished another chore!",
+                dialogMessage: "Yay!!! You finished this chore!",
                 dialogTitle: "Great job!"
             });
         });
