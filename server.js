@@ -8,12 +8,15 @@ const passport = require('./passport');
 const app = express();
 const PORT = process.env.PORT || 8080;
 var mongoose = require('mongoose');
+const cors = require('cors');
+const path = require("path");
 
 // Route requires
 const parentRoute = require('./routes/user');
 const apiRoute = require('./routes/api');
 
 // MIDDLEWARE
+app.use(cors());
 app.use(morgan('dev'));
 app.use(
 	bodyParser.urlencoded({
