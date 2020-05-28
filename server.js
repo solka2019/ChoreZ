@@ -27,8 +27,8 @@ app.use(
 app.use(bodyParser.json());
 
 // if(process.env.NODE_ENV === "production") {
-// 	//server static content//
-// 	app.use(express.static(path.join(__dirname, "client/build")));
+	//server static content//
+	app.use(express.static(path.join(__dirname, "client/build")));
 // }
   
 console.log('dirname', __dirname);
@@ -56,9 +56,9 @@ app.use('/parent', parentRoute);
 app.use('/api', apiRoute);
 
 // default 
-// app.get("*", (req, res) => {
-// 	res.sendFile(path.join(__dirname, "client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 // Starting Server 
 app.listen(PORT, () => {
