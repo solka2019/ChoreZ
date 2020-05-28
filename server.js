@@ -12,7 +12,7 @@ const cors = require('cors');
 const path = require("path");
 
 // Route requires
-const parentRoute = require('./routes/user');
+const userRoute = require('./routes/user');
 const apiRoute = require('./routes/api');
 
 // MIDDLEWARE
@@ -52,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/parent', parentRoute);
+app.use('/parent', userRoute);
 app.use('/api', apiRoute);
 
 // default 
