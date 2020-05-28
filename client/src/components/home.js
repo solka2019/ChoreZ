@@ -139,8 +139,6 @@ class Home extends Component {
                 return (
                     <Button variant="primary" size="lg" className= 'kid-btn'
                         onClick={ () => {thisReferenceFromClass.onChildSelected(child._id, child.name)}}>{child.name}</Button>
-
-
                 );
             });
 
