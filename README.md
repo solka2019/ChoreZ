@@ -1,4 +1,5 @@
-## Project -3 Name?
+## Project -3 
+## ChoreZ 
 
 ## Authors 
 
@@ -27,4 +28,8 @@ This will create a user "mom" with a password "mom" with one child and two chore
 Once we go to the home page, it should show these tasks, and when the "mom" logs in, she should
 see the configuration page to add chores and children.
 
-## Github
+## Deployment
+
+- https://chorezz.herokuapp.com/
+
+- https://github.com/solka2019/Project-3
