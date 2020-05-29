@@ -47,16 +47,6 @@
     opacity: 0.01;
     transition: opacity 300ms ease-in
 }
-
-/* .text-truncate {
-
-    background-color: rgb(159, 159, 187);
-    max-width: 100px;
-    margin-bottom: 20px;
-}
-
-.points {
-    background-color: rgb(197, 197, 107);
-    max-width: auto;
-    text-align: center;
-} */
+ p {
+     font-size: large;
+ }

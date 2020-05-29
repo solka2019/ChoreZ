@@ -177,7 +177,7 @@ class App extends Component {
         {/* greet user if logged in: */}
         {
           this.state.loggedIn &&
-          <p className='welcome' style={{fontSize: '2.2em', color: 'blue', fontFamily: 'arial'}} >Welcome back, {this.state.username}!</p>
+          <p className='welcome' style={{fontSize: '2.2em', color: 'red', fontFamily: 'arial'}} >Welcome back, {this.state.username}!</p>
         }
         
         {/* Routes to different components */}

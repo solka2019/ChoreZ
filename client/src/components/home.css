@@ -6,13 +6,15 @@ html {
 
 .text-truncate {
 
-    background-color: rgb(159, 159, 187);
+    background-color:rgb(125, 194, 250);
     max-width: 100px;
     margin-bottom: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .points {
-    background-color: rgb(197, 197, 107);
+    background-color: white;
     max-width: auto;
     text-align: center;
 }
