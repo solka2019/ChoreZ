@@ -8,12 +8,15 @@ const passport = require('./passport');
 const app = express();
 const PORT = process.env.PORT || 8080;
 var mongoose = require('mongoose');
+const cors = require('cors');
+const path = require("path");
 
 // Route requires
 const userRoute = require('./routes/user');
 const apiRoute = require('./routes/api');
 
 // MIDDLEWARE
+app.use(cors());
 app.use(morgan('dev'));
 app.use(
 	bodyParser.urlencoded({
@@ -22,18 +25,9 @@ app.use(
 );
 
 app.use(bodyParser.json());
-
-// if (process.env.NODE_ENV === 'production') {
-	// IN HEROKU
-	// console.log("Production build detected by NODE_ENV variable");
-	// app.use(express.static('client/build'));
   
-	// const path = require('path');
-	// app.get('*', (req,res) => {
-	// 	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-	// });
-// }
-
+console.log('dirname', __dirname);
+console.log(path.join(__dirname, "client/build"));
 
 // Sessions
 console.log("Creating a dev connection to mongoDB..");
@@ -55,6 +49,16 @@ app.use(passport.session());
 // Routes
 app.use('/parent', userRoute);
 app.use('/api', apiRoute);
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+  
+	const path = require('path');
+	app.get('*', (req,res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+  
+}
 
 // Starting Server 
 app.listen(PORT, () => {

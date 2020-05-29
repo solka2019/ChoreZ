@@ -1,4 +1,6 @@
-## Project -3 Name?
+## Project 3
+
+## ChoreZ
 
 ## Authors 
 
@@ -22,7 +24,7 @@ The most important are the following:
 - How to deploy a React+NodeJS+MongoDB app to Heroku: https://dev.to/pacheco/how-to-deploy-a-webapp-to-heroku-node-js-react-js-and-mongodb-5a7g 
 
 
-## Debug in Dev Environment
+## Debug 
 
 In order to run this app in your local environment, run the following commands:
 1) npm install
@@ -50,3 +52,5 @@ https://chorezz.herokuapp.com/
 
 
 ## Github
+
+- https://github.com/solka2019/Project-3
