@@ -25,11 +25,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-
-// if(process.env.NODE_ENV === "production") {
-	//server static content//
-	app.use(express.static(path.join(__dirname, "client/build")));
-// }
   
 console.log('dirname', __dirname);
 console.log(path.join(__dirname, "client/build"));
@@ -55,10 +50,15 @@ app.use(passport.session());
 app.use('/parent', userRoute);
 app.use('/api', apiRoute);
 
-// default 
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "client/build/index.html"));
-});
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+  
+	const path = require('path');
+	app.get('*', (req,res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+  
+}
 
 // Starting Server 
 app.listen(PORT, () => {
