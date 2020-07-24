@@ -53,4 +53,4 @@ https://chorezz.herokuapp.com/
 
 ## Github
 
-- https://github.com/solka2019/Project-3
+- https://github.com/solka2019/ChoreZ
