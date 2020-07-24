@@ -1,5 +1,3 @@
-## Project 3
-
 ## ChoreZ
 
 ## Authors 
